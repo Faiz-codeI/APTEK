@@ -56,3 +56,5 @@ app.post('/api/predict', (req, res) => {
 app.listen(PORT, () => {
     console.log(`\n  🧠 CareSense Dashboard aktif di: http://localhost:${PORT}\n`);
 });
+
+module.exports = app;
