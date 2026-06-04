@@ -1,0 +1,1 @@
+from duckduckgo_search import DDGS; ddgs = DDGS(); print('Query 1:'); [print(r['href']) for r in ddgs.text('musrenbang desa mojokerto partisipasi masyarakat', max_results=3)]; print('Query 2:'); [print(r['href']) for r in ddgs.text('krisis air bersih kekeringan mojokerto ngoro trawas', max_results=3)]

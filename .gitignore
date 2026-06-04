@@ -1,0 +1,21 @@
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# Large Datasets
+dataset_studentlife/
+dataset_studentlife_excel/
+dataset_baru/
+
+# Local env files
+.env
+.env.local
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Log files
+*.log

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareSense - Burnout Simulator Widget</title>
+    
+    <!-- Link Font Google Outfit -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --text-main: #f8fafc;
+            --text-sub: #94a3b8;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --border: rgba(255, 255, 255, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Outfit', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 35px;
+            width: 100%;
+            max-width: 480px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(to right, #818cf8, #e0e7ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            font-size: 14px;
+            color: var(--text-sub);
+        }
+
+        .input-group {
+            margin-bottom: 24px;
+            position: relative;
+        }
+
+        .label-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .label-container label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #e2e8f0;
+        }
+
+        .val-badge {
+            font-size: 13px;
+            font-weight: 700;
+            color: #818cf8;
+            background: rgba(99, 102, 241, 0.15);
+            padding: 2px 10px;
+            border-radius: 12px;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+        }
+
+        /* Custom Styling Range Slider */
+        input[type="range"] {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 6px;
+            background: #334155;
+            border-radius: 8px;
+            outline: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(99, 102, 241, 0.5);
+            border: 2px solid #e2e8f0;
+        }
+
+        input[type="range"]::-webkit-slider-thumb:hover {
+            background: var(--primary-hover);
+            transform: scale(1.1);
+        }
+
+        .btn-predict {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+            color: white;
+            border: none;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-predict:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
+        }
+
+        .btn-predict:active {
+            transform: translateY(0);
+        }
+
+        .result-card {
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            display: none;
+            text-align: center;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .result-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .result-desc {
+            font-size: 13px;
+            color: #cbd5e1;
+            line-height: 1.5;
+        }
+
+        .risk-bar-container {
+            width: 100%;
+            height: 10px;
+            background: #334155;
+            border-radius: 5px;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+
+        .risk-bar {
+            height: 100%;
+            width: 0%;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>CareSense AI Widget</h1>
+        <p>Pendeteksi Dini Risiko Burnout Mahasiswa</p>
+    </div>
+
+    <!-- Screen Time Slider -->
+    <div class="input-group">
+        <div class="label-container">
+            <label for="screentime">Durasi Layar Harian</label>
+            <span class="val-badge" id="screen_lbl">5.0 Jam</span>
+        </div>
+        <input type="range" id="screentime" min="0" max="15" step="0.5" value="5.0" 
+               oninput="updateLabel('screentime', 'screen_lbl', ' Jam')">
+    </div>
+
+    <!-- Unlock Frequency Slider -->
+    <div class="input-group">
+        <div class="label-container">
+            <label for="unlocks">Frekuensi Buka Layar</label>
+            <span class="val-badge" id="unlock_lbl">40 Kali</span>
+        </div>
+        <input type="range" id="unlocks" min="0" max="150" step="1" value="40" 
+               oninput="updateLabel('unlocks', 'unlock_lbl', ' Kali')">
+    </div>
+
+    <!-- Sleep Duration Slider -->
+    <div class="input-group">
+        <div class="label-container">
+            <label for="sleep">Durasi Tidur Malam</label>
+            <span class="val-badge" id="sleep_lbl">7.0 Jam</span>
+        </div>
+        <input type="range" id="sleep" min="0" max="12" step="0.5" value="7.0" 
+               oninput="updateLabel('sleep', 'sleep_lbl', ' Jam')">
+    </div>
+
+    <!-- Conversation Duration Slider -->
+    <div class="input-group">
+        <div class="label-container">
+            <label for="conv">Interaksi Bicara Harian</label>
+            <span class="val-badge" id="conv_lbl">60 Menit</span>
+        </div>
+        <input type="range" id="conv" min="0" max="180" step="5" value="60" 
+               oninput="updateLabel('conv', 'conv_lbl', ' Menit')">
+    </div>
+
+    <button class="btn-predict" onclick="runSimulation()">Analisis Pola Perilaku</button>
+
+    <!-- Hasil Prediksi -->
+    <div id="resultCard" class="result-card">
+        <div class="result-title" id="resTitle">Status Risiko</div>
+        <div class="result-desc" id="resProb">Probabilitas Burnout: 0%</div>
+        <div class="risk-bar-container">
+            <div id="riskBar" class="risk-bar"></div>
+        </div>
+        <div class="result-desc" id="resDesc">Rekomendasi</div>
+    </div>
+</div>
+
+<script>
+    function updateLabel(sliderId, labelId, suffix) {
+        let val = document.getElementById(sliderId).value;
+        // Format decimal jika mengandung float
+        if (sliderId === 'screentime' || sliderId === 'sleep') {
+            val = parseFloat(val).toFixed(1);
+        }
+        document.getElementById(labelId).innerText = val + suffix;
+    }
+
+    function runSimulation() {
+        const screentime = parseFloat(document.getElementById('screentime').value);
+        const unlocks = parseInt(document.getElementById('unlocks').value);
+        const sleep = parseFloat(document.getElementById('sleep').value);
+        const conv = parseFloat(document.getElementById('conv').value);
+
+        // Model Matematika Pengaruh Fitur (berdasarkan bobot Random Forest kita)
+        // Normalisasi z-score internal secara kasar untuk simulasi
+        const z_screen = (screentime - 4.5) / 2.0; 
+        const z_unlocks = (unlocks - 35) / 15.0;
+        const z_sleep = (sleep - 6.5) / 1.5;
+        const z_conv = (conv - 50) / 25.0;
+
+        // Bobot koefisien pengaruh
+        // Screen time (+), Unlocks (+), Sleep (-), Conversation (-)
+        let score = (z_screen * 0.35) + (z_unlocks * 0.35) - (z_sleep * 0.20) - (z_conv * 0.10);
+        
+        // Konversi ke probabilitas sigmoid (0 - 100%)
+        let prob = 1 / (1 + Math.exp(-score));
+        let probPercent = Math.round(prob * 100);
+
+        const resultCard = document.getElementById('resultCard');
+        const resTitle = document.getElementById('resTitle');
+        const resProb = document.getElementById('resProb');
+        const riskBar = document.getElementById('riskBar');
+        const resDesc = document.getElementById('resDesc');
+
+        resultCard.style.display = 'block';
+        resProb.innerText = "Tingkat Kecenderungan Stres: " + probPercent + "%";
+        riskBar.style.width = probPercent + "%";
+
+        if (probPercent >= 60) {
+            // Burnout/Stres Tinggi
+            resultCard.style.backgroundColor = "rgba(239, 68, 68, 0.1)";
+            resultCard.style.borderColor = "var(--danger)";
+            resTitle.innerText = "🚨 Terdeteksi Risiko Burnout Tinggi";
+            resTitle.style.color = "var(--danger)";
+            riskBar.style.backgroundColor = "var(--danger)";
+            resDesc.innerText = "Rekomendasi: Pola tidur dan interaksi sosial Anda menurun tajam disertai screen-time berlebih. Disarankan untuk membatasi gadget sebelum tidur dan luangkan waktu bersosialisasi.";
+        } else if (probPercent >= 40) {
+            // Peringatan Sedang
+            resultCard.style.backgroundColor = "rgba(245, 158, 11, 0.1)";
+            resultCard.style.borderColor = "var(--warning)";
+            resTitle.innerText = "⚠️ Risiko Burnout Sedang (Waspada)";
+            resTitle.style.color = "var(--warning)";
+            riskBar.style.backgroundColor = "var(--warning)";
+            resDesc.innerText = "Rekomendasi: Pola hidup harian Anda mulai menunjukkan ketidakseimbangan ringan. Cobalah tingkatkan waktu tidur malam dan kurangi frekuensi membungkuk menatap layar gawai.";
+        } else {
+            // Normal
+            resultCard.style.backgroundColor = "rgba(16, 185, 129, 0.1)";
+            resultCard.style.borderColor = "var(--success)";
+            resTitle.innerText = "🟢 Kondisi Mental Stabil (Normal)";
+            resTitle.style.color = "var(--success)";
+            riskBar.style.backgroundColor = "var(--success)";
+            resDesc.innerText = "Rekomendasi: Pertahankan pola tidur malam yang cukup dan interaksi sosial aktif Anda. Durasi penggunaan gawai Anda berada dalam batas sehat.";
+        }
+    }
+</script>
+</body>
+</html>

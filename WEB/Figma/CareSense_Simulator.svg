@@ -1,0 +1,182 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f172a"/>
+      <stop offset="100%" style="stop-color:#1e1b4b"/>
+    </linearGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e293b;stop-opacity:0.9"/>
+      <stop offset="100%" style="stop-color:#0f172a;stop-opacity:0.9"/>
+    </linearGradient>
+    <linearGradient id="btnGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#6366f1"/>
+      <stop offset="100%" style="stop-color:#8b5cf6"/>
+    </linearGradient>
+    <linearGradient id="titleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#818cf8"/>
+      <stop offset="100%" style="stop-color:#e0e7ff"/>
+    </linearGradient>
+    <linearGradient id="dangerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ef4444"/>
+      <stop offset="100%" style="stop-color:#f87171"/>
+    </linearGradient>
+    <linearGradient id="successGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#10b981"/>
+      <stop offset="100%" style="stop-color:#34d399"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="4" stdDeviation="12" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+    <filter id="glow">
+      <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#6366f1" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1440" height="900" fill="url(#bgGrad)"/>
+
+  <!-- ===== SIDEBAR ===== -->
+  <rect x="0" y="0" width="260" height="900" rx="0" fill="#0f172a" stroke="#1e293b" stroke-width="1"/>
+  
+  <!-- Logo -->
+  <text x="130" y="52" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="22" font-weight="700" fill="url(#titleGrad)">🧠 CareSense</text>
+  <text x="130" y="72" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="11" fill="#64748b">Burnout Early Detection</text>
+  
+  <line x1="30" y1="90" x2="230" y2="90" stroke="#1e293b" stroke-width="1"/>
+
+  <!-- Menu Items -->
+  <!-- Active: Simulator -->
+  <rect x="16" y="108" width="228" height="44" rx="12" fill="rgba(99,102,241,0.15)" stroke="#6366f1" stroke-width="1"/>
+  <text x="56" y="135" font-family="Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#a5b4fc">🎮  Simulator Deteksi</text>
+
+  <!-- Inactive: Analytics -->
+  <rect x="16" y="164" width="228" height="44" rx="12" fill="transparent"/>
+  <text x="56" y="191" font-family="Segoe UI, sans-serif" font-size="14" fill="#64748b">📊  Tren Perilaku</text>
+
+  <!-- Inactive: Model -->
+  <rect x="16" y="220" width="228" height="44" rx="12" fill="transparent"/>
+  <text x="56" y="247" font-family="Segoe UI, sans-serif" font-size="14" fill="#64748b">⚙️  Diagnostik Model</text>
+
+  <!-- Inactive: Help -->
+  <rect x="16" y="276" width="228" height="44" rx="12" fill="transparent"/>
+  <text x="56" y="303" font-family="Segoe UI, sans-serif" font-size="14" fill="#64748b">🆘  Bantuan &amp; Rujukan</text>
+
+  <line x1="30" y1="340" x2="230" y2="340" stroke="#1e293b" stroke-width="1"/>
+
+  <!-- Sidebar Footer -->
+  <text x="130" y="860" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="10" fill="#475569">Dataset: StudentLife (Dartmouth)</text>
+  <text x="130" y="878" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="10" fill="#475569">Model: Random Forest | SVM</text>
+
+  <!-- ===== MAIN CONTENT ===== -->
+
+  <!-- Page Title -->
+  <text x="300" y="52" font-family="Segoe UI, sans-serif" font-size="24" font-weight="700" fill="#f1f5f9">Simulator Deteksi Risiko Burnout</text>
+  <text x="300" y="74" font-family="Segoe UI, sans-serif" font-size="13" fill="#64748b">Masukkan data perilaku harian Anda untuk mengetahui tingkat risiko burnout secara real-time.</text>
+
+  <!-- ===== LEFT COLUMN: Input Card ===== -->
+  <rect x="290" y="100" width="480" height="580" rx="20" fill="url(#cardGrad)" filter="url(#shadow)" stroke="#1e293b" stroke-width="1"/>
+  
+  <text x="330" y="140" font-family="Segoe UI, sans-serif" font-size="16" font-weight="700" fill="#e2e8f0">Input Sensor Pasif</text>
+
+  <!-- Dropdown: Pilih Algoritma -->
+  <text x="330" y="178" font-family="Segoe UI, sans-serif" font-size="12" font-weight="600" fill="#94a3b8">Pilih Algoritma ML</text>
+  <rect x="330" y="186" width="400" height="40" rx="10" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="348" y="212" font-family="Segoe UI, sans-serif" font-size="13" fill="#e2e8f0">Random Forest (Akurasi: 80%)</text>
+  <text x="700" y="212" font-family="Segoe UI, sans-serif" font-size="13" fill="#64748b">▼</text>
+
+  <!-- Slider 1: Screen Time -->
+  <text x="330" y="256" font-family="Segoe UI, sans-serif" font-size="12" font-weight="600" fill="#94a3b8">Durasi Layar Harian</text>
+  <rect x="680" y="242" width="50" height="22" rx="8" fill="rgba(99,102,241,0.15)" stroke="rgba(99,102,241,0.3)" stroke-width="1"/>
+  <text x="705" y="258" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="11" font-weight="700" fill="#818cf8">8 Jam</text>
+  <rect x="330" y="268" width="400" height="6" rx="3" fill="#334155"/>
+  <rect x="330" y="268" width="213" height="6" rx="3" fill="url(#btnGrad)"/>
+  <circle cx="543" cy="271" r="10" fill="#6366f1" stroke="#e2e8f0" stroke-width="2" filter="url(#glow)"/>
+
+  <!-- Slider 2: Unlock Frequency -->
+  <text x="330" y="316" font-family="Segoe UI, sans-serif" font-size="12" font-weight="600" fill="#94a3b8">Frekuensi Buka Kunci</text>
+  <rect x="668" y="302" width="62" height="22" rx="8" fill="rgba(99,102,241,0.15)" stroke="rgba(99,102,241,0.3)" stroke-width="1"/>
+  <text x="699" y="318" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="11" font-weight="700" fill="#818cf8">85 Kali</text>
+  <rect x="330" y="328" width="400" height="6" rx="3" fill="#334155"/>
+  <rect x="330" y="328" width="227" height="6" rx="3" fill="url(#btnGrad)"/>
+  <circle cx="557" cy="331" r="10" fill="#6366f1" stroke="#e2e8f0" stroke-width="2" filter="url(#glow)"/>
+
+  <!-- Slider 3: Sleep Duration -->
+  <text x="330" y="376" font-family="Segoe UI, sans-serif" font-size="12" font-weight="600" fill="#94a3b8">Durasi Tidur Malam</text>
+  <rect x="680" y="362" width="50" height="22" rx="8" fill="rgba(99,102,241,0.15)" stroke="rgba(99,102,241,0.3)" stroke-width="1"/>
+  <text x="705" y="378" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="11" font-weight="700" fill="#818cf8">4 Jam</text>
+  <rect x="330" y="388" width="400" height="6" rx="3" fill="#334155"/>
+  <rect x="330" y="388" width="133" height="6" rx="3" fill="url(#btnGrad)"/>
+  <circle cx="463" cy="391" r="10" fill="#6366f1" stroke="#e2e8f0" stroke-width="2" filter="url(#glow)"/>
+
+  <!-- Slider 4: Conversation -->
+  <text x="330" y="436" font-family="Segoe UI, sans-serif" font-size="12" font-weight="600" fill="#94a3b8">Interaksi Bicara Harian</text>
+  <rect x="668" y="422" width="62" height="22" rx="8" fill="rgba(99,102,241,0.15)" stroke="rgba(99,102,241,0.3)" stroke-width="1"/>
+  <text x="699" y="438" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="11" font-weight="700" fill="#818cf8">15 Mnt</text>
+  <rect x="330" y="448" width="400" height="6" rx="3" fill="#334155"/>
+  <rect x="330" y="448" width="33" height="6" rx="3" fill="url(#btnGrad)"/>
+  <circle cx="363" cy="451" r="10" fill="#6366f1" stroke="#e2e8f0" stroke-width="2" filter="url(#glow)"/>
+
+  <!-- Button Analyze -->
+  <rect x="330" y="490" width="400" height="48" rx="14" fill="url(#btnGrad)" filter="url(#glow)"/>
+  <text x="530" y="520" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="15" font-weight="700" fill="white">🔍  Analisis Pola Perilaku</text>
+
+  <!-- Result: Burnout Detected -->
+  <rect x="330" y="560" width="400" height="100" rx="14" fill="rgba(239,68,68,0.08)" stroke="#ef4444" stroke-width="1"/>
+  <text x="530" y="590" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="16" font-weight="700" fill="#f87171">🚨 Terdeteksi Risiko Burnout Tinggi</text>
+  <text x="530" y="612" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="12" fill="#94a3b8">Tingkat Kecenderungan Stres: 78%</text>
+  <!-- Risk bar -->
+  <rect x="370" y="624" width="320" height="8" rx="4" fill="#334155"/>
+  <rect x="370" y="624" width="250" height="8" rx="4" fill="url(#dangerGrad)"/>
+  <text x="530" y="650" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="10" fill="#94a3b8">Rekomendasi: Kurangi screen-time malam hari, tingkatkan waktu tidur.</text>
+
+  <!-- ===== RIGHT COLUMN: Stats Cards ===== -->
+  
+  <!-- KPI Card 1 -->
+  <rect x="800" y="100" width="300" height="120" rx="16" fill="url(#cardGrad)" filter="url(#shadow)" stroke="#1e293b" stroke-width="1"/>
+  <text x="840" y="138" font-family="Segoe UI, sans-serif" font-size="12" fill="#64748b">Akurasi Random Forest</text>
+  <text x="840" y="175" font-family="Segoe UI, sans-serif" font-size="36" font-weight="700" fill="#10b981">80.0%</text>
+  <text x="840" y="200" font-family="Segoe UI, sans-serif" font-size="11" fill="#64748b">F1-Score (Burnout): 0.75</text>
+
+  <!-- KPI Card 2 -->
+  <rect x="1120" y="100" width="280" height="120" rx="16" fill="url(#cardGrad)" filter="url(#shadow)" stroke="#1e293b" stroke-width="1"/>
+  <text x="1160" y="138" font-family="Segoe UI, sans-serif" font-size="12" fill="#64748b">Akurasi SVM</text>
+  <text x="1160" y="175" font-family="Segoe UI, sans-serif" font-size="36" font-weight="700" fill="#f59e0b">53.0%</text>
+  <text x="1160" y="200" font-family="Segoe UI, sans-serif" font-size="11" fill="#64748b">F1-Score (Burnout): 0.53</text>
+
+  <!-- Feature Importance Card -->
+  <rect x="800" y="240" width="600" height="280" rx="16" fill="url(#cardGrad)" filter="url(#shadow)" stroke="#1e293b" stroke-width="1"/>
+  <text x="840" y="278" font-family="Segoe UI, sans-serif" font-size="15" font-weight="700" fill="#e2e8f0">📊 Feature Importance (Faktor Pengaruh Burnout)</text>
+
+  <!-- Bar 1: Screen Time -->
+  <text x="840" y="318" font-family="Segoe UI, sans-serif" font-size="12" fill="#94a3b8">Screen-time</text>
+  <rect x="970" y="304" width="380" height="20" rx="6" fill="#1e293b"/>
+  <rect x="970" y="304" width="340" height="20" rx="6" fill="url(#btnGrad)"/>
+  <text x="1320" y="319" font-family="Segoe UI, sans-serif" font-size="11" font-weight="700" fill="#a5b4fc">35.5%</text>
+
+  <!-- Bar 2: Unlock -->
+  <text x="840" y="358" font-family="Segoe UI, sans-serif" font-size="12" fill="#94a3b8">Unlock Freq</text>
+  <rect x="970" y="344" width="380" height="20" rx="6" fill="#1e293b"/>
+  <rect x="970" y="344" width="342" height="20" rx="6" fill="url(#btnGrad)"/>
+  <text x="1322" y="359" font-family="Segoe UI, sans-serif" font-size="11" font-weight="700" fill="#a5b4fc">35.6%</text>
+
+  <!-- Bar 3: Sleep -->
+  <text x="840" y="398" font-family="Segoe UI, sans-serif" font-size="12" fill="#94a3b8">Durasi Tidur</text>
+  <rect x="970" y="384" width="380" height="20" rx="6" fill="#1e293b"/>
+  <rect x="970" y="384" width="278" height="20" rx="6" fill="url(#successGrad)"/>
+  <text x="1258" y="399" font-family="Segoe UI, sans-serif" font-size="11" font-weight="700" fill="#34d399">28.9%</text>
+
+  <!-- Bar 4: Conversation -->
+  <text x="840" y="438" font-family="Segoe UI, sans-serif" font-size="12" fill="#94a3b8">Percakapan</text>
+  <rect x="970" y="424" width="380" height="20" rx="6" fill="#1e293b"/>
+  <rect x="970" y="424" width="0" height="20" rx="6" fill="#f59e0b"/>
+  <text x="980" y="439" font-family="Segoe UI, sans-serif" font-size="11" font-weight="700" fill="#fbbf24">0.0%</text>
+
+  <!-- Dataset Info Card -->
+  <rect x="800" y="540" width="600" height="140" rx="16" fill="url(#cardGrad)" filter="url(#shadow)" stroke="#1e293b" stroke-width="1"/>
+  <text x="840" y="578" font-family="Segoe UI, sans-serif" font-size="15" font-weight="700" fill="#e2e8f0">📦 Informasi Dataset</text>
+  <text x="840" y="608" font-family="Segoe UI, sans-serif" font-size="12" fill="#94a3b8">Sumber: StudentLife Dataset — Dartmouth College (2014)</text>
+  <text x="840" y="630" font-family="Segoe UI, sans-serif" font-size="12" fill="#94a3b8">Jumlah Data Panel Harian: 2.263 baris × 7 kolom</text>
+  <text x="840" y="652" font-family="Segoe UI, sans-serif" font-size="12" fill="#94a3b8">Jumlah Mahasiswa: 38 orang (10 minggu × 7 hari)</text>
+  <text x="840" y="674" font-family="Segoe UI, sans-serif" font-size="12" fill="#94a3b8">Distribusi: Normal 56% | Burnout 44%</text>
+
+</svg>

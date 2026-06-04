@@ -1,0 +1,32 @@
+# 📋 Spesifikasi Komponen & Opsi CareSense Dashboard
+
+## 1. Opsi Navigasi Menu (Halaman Utama)
+*   **Menu 1: Simulator Deteksi Real-Time (Interactive Simulator)**
+*   **Menu 2: Tren Perilaku & Statistik Deskriptif (Behavioral Analytics)**
+*   **Menu 3: Diagnostik Algoritma ML (Model Performance)**
+*   **Menu 4: Pusat Rekomendasi & Bantuan (Emergency Help & Guide)**
+
+## 2. Komponen Input & Opsi Kontrol (Simulator)
+| Nama Komponen Input | Rentang Batas Opsi |
+| :--- | :--- |
+| **Opsi Pilihan Algoritma** | Random Forest (80%), SVM (53%) |
+| **Slider Screen-time** | 0.0 - 15.0 Jam (kelipatan 0.5) |
+| **Slider Unlock Frequency** | 0 - 150 Kali (kelipatan 1) |
+| **Slider Durasi Tidur** | 0.0 - 12.0 Jam (kelipatan 0.5) |
+| **Slider Durasi Bicara** | 0 - 180 Menit (kelipatan 5) |
+
+## 3. Komponen Output & Visualisasi
+### A. Indikator Status & Persentase Risiko
+*   🟢 **Sehat/Normal:** < 40%
+*   🟡 **Risiko Sedang (Waspada):** 40% - 59%
+*   🔴 **Risiko Tinggi (Burnout):** >= 60%
+*   **Visual:** Gauge Chart / Progress Bar
+
+### B. Grafik Visualisasi Data
+*   **Line Chart:** Tren Harian (Tidur vs HP)
+*   **Bar Chart:** Feature Importance
+*   **Confusion Matrix:** Evaluasi Model RF
+
+## 4. Opsi Ekspor & Aksi
+*   **Tombol "Unduh Laporan"** (PDF/CSV)
+*   **Tombol "Jadwalkan Konseling Kampus"** (Terintegrasi Klinik)

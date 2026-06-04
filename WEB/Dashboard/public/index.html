@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareSense — Teman Kesehatan Mentalmu</title>
+    <meta name="description" content="Dashboard deteksi dini risiko burnout mahasiswa dengan konsep tamagotchi.">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<!-- ===== SPLASH SCREEN / OPENING ===== -->
+<div id="splashScreen" class="splash-screen">
+    <div class="splash-content">
+        <div class="splash-icon">🌱</div>
+        <h1 class="splash-title">CareSense</h1>
+        <p class="splash-desc">Teman digital untuk menjaga keseimbangan <br>pikiran dan aktivitas harianmu di kampus.</p>
+        <button class="btn-splash" onclick="closeSplash()">Mulai Jurnal Harimu ✨</button>
+    </div>
+</div>
+
+<!-- ===== SIDEBAR ===== -->
+<aside class="sidebar">
+    <div class="sidebar-logo">
+        <h1>🌱 CareSense</h1>
+        <p>Teman Mental Sehatmu</p>
+    </div>
+    <div class="sidebar-divider"></div>
+    <ul class="sidebar-menu">
+        <li><a href="#" data-page="page-simulator" class="active" onclick="navigateTo('page-simulator')"><span class="icon">🪴</span> Tanaman Mentalmu</a></li>
+        <li><a href="#" data-page="page-analytics" onclick="navigateTo('page-analytics')"><span class="icon">📈</span> Rapor Kebiasaan</a></li>
+        <li><a href="#" data-page="page-model" onclick="navigateTo('page-model')"><span class="icon">🤓</span> Di Balik Layar (Statistik)</a></li>
+        <li><a href="#" data-page="page-help" onclick="navigateTo('page-help')"><span class="icon">💖</span> Butuh Bantuan?</a></li>
+    </ul>
+    <div class="sidebar-footer">
+        Ditenagai oleh AI &amp; Pasive Sensing<br>
+        (Random Forest Model)
+    </div>
+</aside>
+
+<!-- ===== MAIN ===== -->
+<main class="main">
+
+    <!-- ========== PAGE 1: SIMULATOR (GAMIFIED) ========== -->
+    <div id="page-simulator" class="page active">
+        <div class="page-header">
+            <h2>Kondisi Tanaman Mentalmu 🪴</h2>
+            <p>Rawat "tanaman mentalmu" dengan menjaga pola tidur, interaksi sosial, dan membatasi waktu layar.</p>
+        </div>
+
+        <div class="grid-2">
+            <!-- Left: Avatar / Companion Display -->
+            <div class="card companion-card">
+                <div class="companion-stage" id="companionStage">
+                    <div class="companion-emoji" id="companionEmoji">🌿</div>
+                    <div class="companion-shadow"></div>
+                </div>
+                <div class="companion-status" id="companionStatus">
+                    <h3>Halo! Aku Tanaman Mentalmu.</h3>
+                    <p>Coba ceritakan kebiasaanmu hari ini di sebelah kanan, dan lihat reaksiku!</p>
+                </div>
+                <div class="risk-bar-bg" style="margin-top: 20px; display: none;" id="riskBarContainer">
+                    <div class="risk-bar" id="riskBar"></div>
+                </div>
+                <div class="companion-rec" id="companionRec"></div>
+            </div>
+
+            <!-- Right: Input Controls -->
+            <div class="card">
+                
+                <!-- NEW FEATURE: Mood Check-in -->
+                <div class="mood-section">
+                    <h3 style="font-size: 15px; font-weight: 600; margin-bottom: 12px; color: var(--text-main);">Bagaimana perasaanmu hari ini?</h3>
+                    <div class="mood-options">
+                        <div class="mood-btn" onclick="selectMood(this, 'Senang')">🤩</div>
+                        <div class="mood-btn" onclick="selectMood(this, 'Biasa')">😐</div>
+                        <div class="mood-btn" onclick="selectMood(this, 'Lelah')">😥</div>
+                        <div class="mood-btn" onclick="selectMood(this, 'Cemas')">😵‍💫</div>
+                    </div>
+                </div>
+
+                <div class="card-title" style="font-size: 15px; border-top: 1px solid var(--border); padding-top: 20px;">Lalu, bagaimana kebiasaanmu dari data HP-mu?</div>
+
+                <div class="form-group model-toggle-container">
+                    <label>Pilih Model AI:</label>
+                    <div class="segmented-control">
+                        <button type="button" class="segmented-btn active" data-value="rf" onclick="selectModel('rf')">Random Forest (80%)</button>
+                        <button type="button" class="segmented-btn" data-value="svm" onclick="selectModel('svm')">SVM (53%)</button>
+                    </div>
+                    <input type="hidden" id="sel_model" value="rf">
+                </div>
+
+                <div class="form-group">
+                    <label>Berapa lama menatap layar HP? <span class="badge" id="badge_screen">5.0 Jam</span></label>
+                    <input type="range" id="sl_screen" min="0" max="15" step="0.5" value="5"
+                           oninput="updateSlider('sl_screen','badge_screen',' Jam'); triggerPreview();">
+                </div>
+
+                <div class="form-group">
+                    <label>Berapa kali iseng buka-tutup HP? <span class="badge" id="badge_unlock">40 Kali</span></label>
+                    <input type="range" id="sl_unlock" min="0" max="150" step="1" value="40"
+                           oninput="updateSlider('sl_unlock','badge_unlock',' Kali'); triggerPreview();">
+                </div>
+
+                <div class="form-group">
+                    <label>Berapa jam tidur semalam? <span class="badge" id="badge_sleep">7.0 Jam</span></label>
+                    <input type="range" id="sl_sleep" min="0" max="12" step="0.5" value="7"
+                           oninput="updateSlider('sl_sleep','badge_sleep',' Jam'); triggerPreview();">
+                </div>
+
+                <div class="form-group">
+                    <label>Ngobrol tatap muka hari ini? <span class="badge" id="badge_conv">60 Menit</span></label>
+                    <input type="range" id="sl_conv" min="0" max="180" step="5" value="60"
+                           oninput="updateSlider('sl_conv','badge_conv',' Menit'); triggerPreview();">
+                </div>
+
+                <button class="btn-primary" onclick="runPrediction()">✨ Evaluasi Kondisiku</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== PAGE 2: ANALYTICS (SIMPLIFIED) ========== -->
+    <div id="page-analytics" class="page">
+        <div class="page-header">
+            <h2>Rapor Kebiasaan (Tren)</h2>
+            <p>Melihat kembali pola kebiasaan mahasiswa dari waktu ke waktu.</p>
+        </div>
+
+        <div class="card" style="margin-bottom:24px">
+            <div class="card-title">📈 Pola Waktu Layar vs Waktu Tidur</div>
+            <p style="font-size:13px;color:var(--text-sub);line-height:1.7;margin-bottom:12px">
+                Berdasarkan data <strong>StudentLife</strong>, rata-rata mahasiswa mulai kurang tidur dan lebih banyak menatap layar saat mendekati minggu ujian (UTS/UAS). Jangan sampai kamu ikut layu ya!
+            </p>
+            <svg viewBox="0 0 800 280" style="width:100%;max-width:800px">
+                <rect width="800" height="280" fill="#0f172a" rx="8"/>
+                <line x1="60" y1="30" x2="60" y2="240" stroke="#334155" stroke-width="1"/>
+                <line x1="60" y1="240" x2="760" y2="240" stroke="#334155" stroke-width="1"/>
+                <text x="50" y="40" text-anchor="end" font-size="9" fill="#64748b">12h</text>
+                <text x="50" y="140" text-anchor="end" font-size="9" fill="#64748b">6h</text>
+                <text x="50" y="240" text-anchor="end" font-size="9" fill="#64748b">0h</text>
+                <text x="120" y="258" font-size="9" fill="#64748b">Mgg 1</text>
+                <text x="360" y="258" font-size="9" fill="#64748b">UTS</text>
+                <text x="700" y="258" font-size="9" fill="#64748b">UAS</text>
+                <line x1="380" y1="30" x2="380" y2="240" stroke="#ef4444" stroke-width="1" stroke-dasharray="4,4"/>
+                <line x1="720" y1="30" x2="720" y2="240" stroke="#ef4444" stroke-width="1" stroke-dasharray="4,4"/>
+                <polyline points="80,190 200,175 320,155 380,140 500,132 620,110 740,85"
+                    fill="none" stroke="#818cf8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <polyline points="80,130 200,142 320,160 380,175 500,182 620,200 740,220"
+                    fill="none" stroke="#fbbf24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <rect x="560" y="35" width="10" height="10" rx="2" fill="#818cf8"/>
+                <text x="576" y="44" font-size="10" fill="#94a3b8">Layar HP</text>
+                <rect x="660" y="35" width="10" height="10" rx="2" fill="#fbbf24"/>
+                <text x="676" y="44" font-size="10" fill="#94a3b8">Tidur</text>
+            </svg>
+            <div class="action-row" style="margin-top:20px; display:flex; gap:12px;">
+                <button class="btn-secondary" onclick="downloadReport('csv')">📥 Unduh Data Sensor (CSV)</button>
+                <button class="btn-secondary" onclick="downloadReport('pdf')">📄 Unduh Rapor Ringkas (PDF)</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== PAGE 3: MODEL DIAGNOSTICS ========== -->
+    <div id="page-model" class="page">
+        <div class="page-header">
+            <h2>Di Balik Layar (Statistik &amp; Model)</h2>
+            <p>Bagi yang penasaran, ini adalah "otak" di balik animasi tanaman mentalmu.</p>
+        </div>
+
+        <div class="grid-2">
+            <div class="card">
+                <div class="card-title">🤖 Performa Kecerdasan Buatan (AI)</div>
+                <p style="font-size:13px;color:var(--text-sub);line-height:1.8;margin-bottom:16px;">
+                    Aplikasi ini menggunakan algoritma <strong>Random Forest</strong> yang dilatih dari data mahasiswa sungguhan.
+                </p>
+                <div class="kpi-grid">
+                    <div class="kpi-card-mini">
+                        <div class="kpi-label">Random Forest</div>
+                        <div class="kpi-value success">80.0%</div>
+                    </div>
+                    <div class="kpi-card-mini">
+                        <div class="kpi-label">SVM (RBF Kernel)</div>
+                        <div class="kpi-value warning">53.0%</div>
+                    </div>
+                </div>
+                
+                <h4 style="margin: 24px 0 12px; font-size: 14px; font-weight: 600; color: var(--text-main)">Confusion Matrix (Random Forest)</h4>
+                <div class="confusion-matrix">
+                    <div class="cm-cell header"></div>
+                    <div class="cm-cell header">Pred Stres</div>
+                    <div class="cm-cell header">Pred Normal</div>
+                    
+                    <div class="cm-cell side">Aktual Stres</div>
+                    <div class="cm-cell val tp" title="True Positive">12 <small>(TP)</small></div>
+                    <div class="cm-cell val fn" title="False Negative">2 <small>(FN)</small></div>
+                    
+                    <div class="cm-cell side">Aktual Normal</div>
+                    <div class="cm-cell val fp" title="False Positive">3 <small>(FP)</small></div>
+                    <div class="cm-cell val tn" title="True Negative">8 <small>(TN)</small></div>
+                </div>
+                <div class="cm-legend">
+                    * Data uji: 25 mahasiswa. Akurasi 80% didapat dari (TP + TN) / Total.
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">📊 Apa yang paling bikin mahasiswa Burnout?</div>
+                <p style="font-size:13px;color:var(--text-sub);line-height:1.8;margin-bottom:16px;">
+                    Menurut model kami, ini adalah kebiasaan yang paling berkontribusi terhadap stres (Feature Importance):
+                </p>
+                <div class="fi-row">
+                    <div class="fi-label">Terlalu Sering Buka HP</div>
+                    <div class="fi-bar-bg"><div class="fi-bar" style="width:98%"></div></div>
+                    <div class="fi-val">35.6%</div>
+                </div>
+                <div class="fi-row">
+                    <div class="fi-label">Lama Menatap Layar</div>
+                    <div class="fi-bar-bg"><div class="fi-bar" style="width:97%"></div></div>
+                    <div class="fi-val">35.5%</div>
+                </div>
+                <div class="fi-row">
+                    <div class="fi-label">Kurang Tidur</div>
+                    <div class="fi-bar-bg"><div class="fi-bar" style="width:80%"></div></div>
+                    <div class="fi-val">28.9%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== PAGE 4: HELP ========== -->
+    <div id="page-help" class="page">
+        <div class="page-header">
+            <h2>Pusat Bantuan 💖</h2>
+            <p>Kesehatan mentalmu sama pentingnya dengan nilai IPK-mu.</p>
+        </div>
+
+        <div class="card help-card emergency">
+            <h4>🚨 Butuh Teman Cerita Darurat?</h4>
+            <p>Kamu tidak sendirian. Jika kamu merasa sangat berat hari ini, tolong hubungi:<br>
+            <strong>Into The Light Indonesia: 119 ext. 8</strong><br>
+            <strong>Sejiwa: 119 ext. 8</strong></p>
+        </div>
+
+        <div class="card help-card tip">
+            <h4>🌱 Cara Merawat "Tanaman Mentalmu"</h4>
+            <p>
+            1. <strong>Tidur Cukup:</strong> Usahakan tidur 7-8 jam. Jangan paksakan begadang (SKS).<br>
+            2. <strong>Kurangi Layar:</strong> Jauhkan HP 1 jam sebelum tidur agar pikiran rileks.<br>
+            3. <strong>Sosialisasi:</strong> Ngobrol dengan teman, walau hanya 15 menit, sangat membantu melepas stres!
+            </p>
+        </div>
+
+        <div class="card help-card counseling-form-card" style="border-left-color: var(--primary-light); background: rgba(52, 211, 153, 0.03);">
+            <h4>📅 Jadwalkan Konseling Kampus</h4>
+            <p style="font-size: 13px; color: var(--text-sub); margin-bottom: 16px; line-height: 1.6;">
+                Jika kamu membutuhkan bimbingan atau curhat dengan psikolog profesional kampus, jadwalkan pertemuan di sini. Kerahasiaan data terjamin.
+            </p>
+            <form id="counselingForm" onsubmit="handleCounselingSubmit(event)">
+                <div style="display: flex; gap: 16px; margin-bottom: 12px; flex-wrap: wrap;">
+                    <div style="flex: 1; min-width: 150px;">
+                        <label for="counselingDate" style="display: block; font-size: 12px; color: var(--text-sub); margin-bottom: 6px;">Pilih Tanggal</label>
+                        <input type="date" id="counselingDate" required style="width: 100%; padding: 10px; background: #1e293b; color: var(--text-main); border: 1px solid #334155; border-radius: 8px; font-family: inherit;">
+                    </div>
+                    <div style="flex: 1; min-width: 150px;">
+                        <label for="counselingTime" style="display: block; font-size: 12px; color: var(--text-sub); margin-bottom: 6px;">Pilih Jam</label>
+                        <select id="counselingTime" required style="width: 100%; padding: 10px; background: #1e293b; color: var(--text-main); border: 1px solid #334155; border-radius: 8px; font-family: inherit;">
+                            <option value="">-- Pilih Jam --</option>
+                            <option value="09:00">09:00 - 10:00 WIB</option>
+                            <option value="11:00">11:00 - 12:00 WIB</option>
+                            <option value="13:30">13:30 - 14:30 WIB</option>
+                            <option value="15:00">15:00 - 16:00 WIB</option>
+                        </select>
+                    </div>
+                </div>
+                <div style="margin-bottom: 16px;">
+                    <label for="counselingNotes" style="display: block; font-size: 12px; color: var(--text-sub); margin-bottom: 6px;">Keluhan / Catatan Tambahan (Opsional)</label>
+                    <textarea id="counselingNotes" rows="2" placeholder="Tulis keluhan atau topik yang ingin diceritakan..." style="width: 100%; padding: 10px; background: #1e293b; color: var(--text-main); border: 1px solid #334155; border-radius: 8px; font-family: inherit; resize: vertical;"></textarea>
+                </div>
+                <button type="submit" class="btn-primary" style="margin-top: 0; padding: 12px 24px; font-size: 14px; width: auto;">Buat Janji Temu ✨</button>
+            </form>
+            <div id="counselingSuccessMsg" style="display: none; margin-top: 16px; padding: 12px; background: var(--primary-bg); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 8px; color: var(--primary-light); font-size: 13px; line-height: 1.5;">
+                ✅ <strong>Jadwal konseling berhasil dikirim!</strong> Silakan cek email kampusmu untuk konfirmasi janji temu.
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<script src="/js/app.js"></script>
+</body>
+</html>

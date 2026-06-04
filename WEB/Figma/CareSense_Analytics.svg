@@ -1,0 +1,143 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f172a"/>
+      <stop offset="100%" style="stop-color:#1e1b4b"/>
+    </linearGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e293b;stop-opacity:0.9"/>
+      <stop offset="100%" style="stop-color:#0f172a;stop-opacity:0.9"/>
+    </linearGradient>
+    <linearGradient id="titleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#818cf8"/>
+      <stop offset="100%" style="stop-color:#e0e7ff"/>
+    </linearGradient>
+    <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#6366f1"/>
+      <stop offset="100%" style="stop-color:#8b5cf6"/>
+    </linearGradient>
+    <linearGradient id="lineGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#f59e0b"/>
+      <stop offset="100%" style="stop-color:#fbbf24"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="4" stdDeviation="12" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1440" height="900" fill="url(#bgGrad)"/>
+
+  <!-- ===== SIDEBAR ===== -->
+  <rect x="0" y="0" width="260" height="900" fill="#0f172a" stroke="#1e293b" stroke-width="1"/>
+  <text x="130" y="52" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="22" font-weight="700" fill="url(#titleGrad)">🧠 CareSense</text>
+  <text x="130" y="72" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="11" fill="#64748b">Burnout Early Detection</text>
+  <line x1="30" y1="90" x2="230" y2="90" stroke="#1e293b" stroke-width="1"/>
+
+  <rect x="16" y="108" width="228" height="44" rx="12" fill="transparent"/>
+  <text x="56" y="135" font-family="Segoe UI, sans-serif" font-size="14" fill="#64748b">🎮  Simulator Deteksi</text>
+
+  <rect x="16" y="164" width="228" height="44" rx="12" fill="rgba(99,102,241,0.15)" stroke="#6366f1" stroke-width="1"/>
+  <text x="56" y="191" font-family="Segoe UI, sans-serif" font-size="14" font-weight="600" fill="#a5b4fc">📊  Tren Perilaku</text>
+
+  <rect x="16" y="220" width="228" height="44" rx="12" fill="transparent"/>
+  <text x="56" y="247" font-family="Segoe UI, sans-serif" font-size="14" fill="#64748b">⚙️  Diagnostik Model</text>
+
+  <rect x="16" y="276" width="228" height="44" rx="12" fill="transparent"/>
+  <text x="56" y="303" font-family="Segoe UI, sans-serif" font-size="14" fill="#64748b">🆘  Bantuan &amp; Rujukan</text>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <text x="300" y="52" font-family="Segoe UI, sans-serif" font-size="24" font-weight="700" fill="#f1f5f9">Tren Perilaku &amp; Statistik Deskriptif</text>
+  <text x="300" y="74" font-family="Segoe UI, sans-serif" font-size="13" fill="#64748b">Visualisasi pola sensor harian mahasiswa selama 10 minggu penelitian.</text>
+
+  <!-- ===== Line Chart: Screen-time vs Sleep ===== -->
+  <rect x="290" y="100" width="820" height="360" rx="16" fill="url(#cardGrad)" filter="url(#shadow)" stroke="#1e293b" stroke-width="1"/>
+  <text x="330" y="138" font-family="Segoe UI, sans-serif" font-size="15" font-weight="700" fill="#e2e8f0">📈 Tren Harian: Screen-time vs Durasi Tidur (70 Hari)</text>
+
+  <!-- Axis -->
+  <line x1="370" y1="170" x2="370" y2="420" stroke="#334155" stroke-width="1"/>
+  <line x1="370" y1="420" x2="1070" y2="420" stroke="#334155" stroke-width="1"/>
+  <text x="350" y="180" text-anchor="end" font-family="Segoe UI, sans-serif" font-size="10" fill="#64748b">12h</text>
+  <text x="350" y="230" text-anchor="end" font-family="Segoe UI, sans-serif" font-size="10" fill="#64748b">9h</text>
+  <text x="350" y="280" text-anchor="end" font-family="Segoe UI, sans-serif" font-size="10" fill="#64748b">6h</text>
+  <text x="350" y="330" text-anchor="end" font-family="Segoe UI, sans-serif" font-size="10" fill="#64748b">3h</text>
+  <text x="350" y="420" text-anchor="end" font-family="Segoe UI, sans-serif" font-size="10" fill="#64748b">0h</text>
+  <text x="420" y="440" font-family="Segoe UI, sans-serif" font-size="10" fill="#64748b">Mgg 1</text>
+  <text x="520" y="440" font-family="Segoe UI, sans-serif" font-size="10" fill="#64748b">Mgg 3</text>
+  <text x="620" y="440" font-family="Segoe UI, sans-serif" font-size="10" fill="#64748b">Mgg 5</text>
+  <text x="720" y="440" font-family="Segoe UI, sans-serif" font-size="10" fill="#64748b">UTS</text>
+  <text x="820" y="440" font-family="Segoe UI, sans-serif" font-size="10" fill="#64748b">Mgg 7</text>
+  <text x="920" y="440" font-family="Segoe UI, sans-serif" font-size="10" fill="#64748b">Mgg 9</text>
+  <text x="1020" y="440" font-family="Segoe UI, sans-serif" font-size="10" fill="#64748b">UAS</text>
+
+  <!-- Screen-time line (naik menjelang UTS/UAS) -->
+  <polyline points="400,340 450,330 500,310 550,300 600,290 650,270 700,250 750,260 800,240 850,230 900,220 950,200 1000,180 1050,170"
+    fill="none" stroke="url(#lineGrad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Sleep line (turun menjelang UTS/UAS) -->
+  <polyline points="400,280 450,290 500,295 550,300 600,310 650,320 700,340 750,330 800,350 850,360 900,370 950,380 1000,390 1050,400"
+    fill="none" stroke="url(#lineGrad2)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- UTS marker -->
+  <line x1="720" y1="170" x2="720" y2="420" stroke="#ef4444" stroke-width="1" stroke-dasharray="5,5"/>
+  <text x="720" y="165" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="10" font-weight="700" fill="#ef4444">UTS</text>
+
+  <!-- Legend -->
+  <rect x="860" y="136" width="10" height="10" rx="2" fill="#6366f1"/>
+  <text x="878" y="146" font-family="Segoe UI, sans-serif" font-size="11" fill="#94a3b8">Screen-time</text>
+  <rect x="970" y="136" width="10" height="10" rx="2" fill="#f59e0b"/>
+  <text x="988" y="146" font-family="Segoe UI, sans-serif" font-size="11" fill="#94a3b8">Durasi Tidur</text>
+
+  <!-- ===== Correlation Scatter Plot ===== -->
+  <rect x="290" y="480" width="400" height="300" rx="16" fill="url(#cardGrad)" filter="url(#shadow)" stroke="#1e293b" stroke-width="1"/>
+  <text x="330" y="518" font-family="Segoe UI, sans-serif" font-size="14" font-weight="700" fill="#e2e8f0">🔗 Korelasi: Screen-time vs Tidur</text>
+
+  <!-- Scatter dots (Normal = green, Burnout = red) -->
+  <circle cx="380" cy="560" r="4" fill="#10b981" opacity="0.7"/>
+  <circle cx="400" cy="570" r="4" fill="#10b981" opacity="0.7"/>
+  <circle cx="420" cy="555" r="4" fill="#10b981" opacity="0.7"/>
+  <circle cx="440" cy="580" r="4" fill="#10b981" opacity="0.7"/>
+  <circle cx="460" cy="590" r="4" fill="#10b981" opacity="0.7"/>
+  <circle cx="480" cy="600" r="4" fill="#10b981" opacity="0.7"/>
+  <circle cx="500" cy="610" r="4" fill="#ef4444" opacity="0.7"/>
+  <circle cx="520" cy="630" r="4" fill="#ef4444" opacity="0.7"/>
+  <circle cx="540" cy="650" r="4" fill="#ef4444" opacity="0.7"/>
+  <circle cx="560" cy="660" r="4" fill="#ef4444" opacity="0.7"/>
+  <circle cx="580" cy="670" r="4" fill="#ef4444" opacity="0.7"/>
+  <circle cx="600" cy="680" r="4" fill="#ef4444" opacity="0.7"/>
+  <circle cx="620" cy="700" r="4" fill="#ef4444" opacity="0.7"/>
+  <circle cx="640" cy="710" r="4" fill="#ef4444" opacity="0.7"/>
+  <circle cx="500" cy="590" r="4" fill="#10b981" opacity="0.7"/>
+  <circle cx="530" cy="600" r="4" fill="#10b981" opacity="0.7"/>
+  <circle cx="570" cy="640" r="4" fill="#ef4444" opacity="0.7"/>
+  <circle cx="610" cy="660" r="4" fill="#ef4444" opacity="0.7"/>
+
+  <!-- Trend line -->
+  <line x1="370" y1="545" x2="650" y2="720" stroke="#8b5cf6" stroke-width="1.5" stroke-dasharray="4,4"/>
+
+  <text x="400" y="755" font-family="Segoe UI, sans-serif" font-size="10" fill="#64748b">Screen-time (Jam) →</text>
+  <text x="340" y="640" font-family="Segoe UI, sans-serif" font-size="10" fill="#64748b" transform="rotate(-90, 340, 640)">Tidur (Jam) →</text>
+
+  <!-- Legend -->
+  <circle cx="510" cy="745" r="5" fill="#10b981"/>
+  <text x="522" y="749" font-family="Segoe UI, sans-serif" font-size="10" fill="#94a3b8">Normal</text>
+  <circle cx="580" cy="745" r="5" fill="#ef4444"/>
+  <text x="592" y="749" font-family="Segoe UI, sans-serif" font-size="10" fill="#94a3b8">Burnout</text>
+
+  <!-- ===== Distribution Pie Chart ===== -->
+  <rect x="710" y="480" width="400" height="300" rx="16" fill="url(#cardGrad)" filter="url(#shadow)" stroke="#1e293b" stroke-width="1"/>
+  <text x="750" y="518" font-family="Segoe UI, sans-serif" font-size="14" font-weight="700" fill="#e2e8f0">🥧 Distribusi Kelas Target</text>
+
+  <!-- Donut Chart -->
+  <circle cx="910" cy="640" r="80" fill="none" stroke="#10b981" stroke-width="24" stroke-dasharray="281 220" stroke-dashoffset="0"/>
+  <circle cx="910" cy="640" r="80" fill="none" stroke="#ef4444" stroke-width="24" stroke-dasharray="220 281" stroke-dashoffset="-281"/>
+  <circle cx="910" cy="640" r="55" fill="#0f172a"/>
+  <text x="910" y="636" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="20" font-weight="700" fill="#f1f5f9">2,263</text>
+  <text x="910" y="655" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="10" fill="#64748b">Total Baris</text>
+
+  <rect x="760" y="740" width="12" height="12" rx="3" fill="#10b981"/>
+  <text x="780" y="751" font-family="Segoe UI, sans-serif" font-size="11" fill="#94a3b8">Normal: 1.272 (56%)</text>
+  <rect x="920" y="740" width="12" height="12" rx="3" fill="#ef4444"/>
+  <text x="940" y="751" font-family="Segoe UI, sans-serif" font-size="11" fill="#94a3b8">Burnout: 991 (44%)</text>
+
+</svg>
